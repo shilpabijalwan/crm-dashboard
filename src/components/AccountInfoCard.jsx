@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   FiMail,
   FiPhone,
@@ -9,7 +9,7 @@ import {
 } from "react-icons/fi";
 
 const AccountInfoCard = () => {
-  const [addPhoneNumber,setAddPhoneNumber]=useState([])
+  const [addPhoneNumber, setAddPhoneNumber] = useState([]);
   return (
     <div className="mt-2 p-6 w-full max-w-md ">
       {/* Header */}
