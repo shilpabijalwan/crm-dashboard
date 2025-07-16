@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import { FiSearch, FiBell, FiSun, FiMoon } from "react-icons/fi";
 
-const Topbar = () => {
+const Navbar = () => {
   const [theme, setTheme] = useState(null);
 
   useLayoutEffect(() => {
@@ -60,4 +60,4 @@ const Topbar = () => {
   );
 };
 
-export default Topbar;
+export default Navbar;

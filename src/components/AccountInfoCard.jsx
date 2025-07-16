@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FiMail,
   FiPhone,
@@ -7,38 +7,113 @@ import {
   FiPlus,
   FiChevronDown,
 } from "react-icons/fi";
+import { getInitials } from "../utils";
+import { CONTACT_OWNER, COUNTRY_CODES } from "../utils/constatnts";
+import OptionsComponent from "./OptionsComponent";
+
+const DEFAULT_FORM = {
+  accountName: "Default Account",
+  email: "defaultAccount@example.com",
+  phoneNumbers: [],
+  contactOwner: "",
+};
 
 const AccountInfoCard = () => {
-  const [addPhoneNumber, setAddPhoneNumber] = useState([]);
+  const [formData, setFormData] = useState(DEFAULT_FORM);
+  const [saveBussinessDetails, setSaveBussinessDetails] = useState(null);
+  const [initials, setInitials] = useState("");
+  const [isBussinessDetails, setIsBussinessDetails] = useState(false);
+
+  // Load saved data on mount
+  useEffect(() => {
+    const saved = localStorage.getItem("accountInfo");
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      setSaveBussinessDetails(parsed);
+    }
+  }, []);
+
+  // When saved data updates, update form + initials
+  useEffect(() => {
+    if (!saveBussinessDetails) return;
+
+    setFormData({
+      accountName: saveBussinessDetails.accountName || DEFAULT_FORM.accountName,
+      email: saveBussinessDetails.email || DEFAULT_FORM.email,
+      phoneNumbers: saveBussinessDetails.phoneNumbers || [],
+      contactOwner: saveBussinessDetails.contactOwner || "",
+    });
+
+    setInitials(
+      getInitials(saveBussinessDetails.accountName || DEFAULT_FORM.accountName)
+    );
+  }, [saveBussinessDetails]);
+
+  // Handlers
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  // Save form data to localStorage and update state
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    localStorage.setItem("accountInfo", JSON.stringify(formData));
+    setSaveBussinessDetails(formData);
+    console.log(e);
+    if (e.type === "submit") {
+      setIsBussinessDetails(false);
+    }
+    alert("Business details saved successfully!");
+  };
+
+  const handlePhoneChange = (value, idx) => {
+    const updatedPhones = [...formData.phoneNumbers];
+    updatedPhones[idx] = value;
+    setFormData({ ...formData, phoneNumbers: updatedPhones });
+  };
+  // Remove phone number handler
+  const handlePhoneRemove = (e, idx) => {
+    e.preventDefault();
+    const updatedPhones = formData.phoneNumbers.filter((_, i) => i !== idx);
+    setFormData({ ...formData, phoneNumbers: updatedPhones });
+  };
+
+  // Add phone number handler
+  const handleAddPhone = (e) => {
+    e.preventDefault();
+    if (formData.phoneNumbers.length >= 3) return; // Limit to 3 phone numbers
+    // else Add a new empty phone number field
+    setFormData({ ...formData, phoneNumbers: [...formData.phoneNumbers, ""] });
+  };
+
   return (
-    <div className="mt-2 p-6 w-full max-w-md ">
+    <div className="mt-2 w-full max-w-md ">
       {/* Header */}
-      <div className="flex items-center justify-between border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-3 bg-gray-50 dark:bg-gray-900">
-        <div className="flex items-center gap-4 w-full">
+      <div className=" flex items-center justify-between border border-gray-200 dark:border-gray-700 rounded-lg  py-3 bg-gray-50 dark:bg-gray-900">
+        <div className="flex items-center gap-4 w-full px-2 justify-between">
           <div className="relative">
-            <div className="w-12 h-12 bg-purple-600 text-white rounded-full flex items-center justify-center text-lg font-bold">
-              TG
+            <div className="w-10 h-10 bg-purple-600 text-white rounded-full flex items-center justify-center text-lg font-bold">
+              {initials}
             </div>
             {/* <span className="absolute bottom-1 -right-1 text-xs text-blue-500 cursor-pointer">
               Edit
             </span> */}
           </div>
-          <div className="flex flex-col w-full py-2 gap-3">
-            <div className="flex text-lg font-semibold text-gray-800 dark:text-white justify-between">
-              <div className="flex gap-2 text-xs mt-1 text-gray-600 dark:text-gray-400">
-                <p className="font-semibold text-gray-800 dark:text-white">
-                  Truck Grear
+          <div className="flex flex-col w-full gap-3">
+            <div className="flex text-lg font-semibold text-gray-800 dark:text-white justify-between ">
+              <div className="flex gap-2 text-xs mt-1 text-gray-600 dark:text-gray-400 rounded ">
+                <p className="font-semibold text-gray-800 dark:text-white truncate max-w-[100px] ">
+                  {saveBussinessDetails?.accountName || ""}
                 </p>
                 <span className="bg-orange-100 text-orange-500 px-2 py-0.5 rounded-full text-[10px] font-semibold">
                   BUSINESS
                 </span>
               </div>
-              <button className="text-sm text-blue-600 hover:underline">
+              <button className="cursor-pointer text-sm text-blue-600">
                 Change Status
               </button>
             </div>
-            <div className="text-sm text-gray-500 dark:text-gray-300">
-              jillali@onechanneladmin.com
+            <div className="text-sm text-gray-500 dark:text-gray-300 truncate">
+              {saveBussinessDetails?.email}
             </div>
           </div>
         </div>
@@ -65,69 +140,112 @@ const AccountInfoCard = () => {
       </div>
 
       {/* Form Section business details */}
+
       <div className="mt-6 border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-white dark:bg-gray-900">
-        <div className="flex items-center justify-between mb-2">
-          <h3 className="text-sm font-semibold text-gray-700 dark:text-white">
-            Business Details
-          </h3>
-          <button className="flex items-center gap-1 text-green-600 text-sm font-medium hover:underline">
-            <FiCalendar className="text-green-600" />
-            Save & Close
-          </button>
-        </div>
-
-        <div className="space-y-4">
-          <div>
-            <label className="text-xs text-gray-500">Account Name</label>
-            <input
-              type="text"
-              value="TRUCK GREAR"
-              className="w-full mt-1 px-3 py-2 rounded border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
-            />
+        <form action="" onSubmit={handleFormSubmit}>
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="text-sm font-semibold text-gray-700 dark:text-white">
+              Business Details
+            </h3>
+            {isBussinessDetails ? (
+              <button
+                type="submit"
+                className="flex items-center gap-1 text-green-600 text-sm font-medium"
+              >
+                <FiCalendar className="text-green-600" />
+                Save & Close
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsBussinessDetails(true);
+                }}
+                className="flex items-center gap-1 text-green-600 text-sm font-medium"
+              >
+                <FiCalendar className="text-green-600" />
+                Edit Details
+              </button>
+            )}
           </div>
-          <div>
-            <label className="text-xs text-gray-500">Email</label>
-            <input
-              type="email"
-              value="Jillali@Onechanneladmin.Com"
-              className="w-full mt-1 px-3 py-2 rounded border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
-            />
-          </div>
-
-          {/* Phone Numbers */}
-          <div>
-            <label className="text-xs text-gray-500">Phone Number</label>
-            {addPhoneNumber?.map((_, idx) => (
-              <div key={idx} className="flex items-center gap-2 mt-2">
-                <div className="flex items-center gap-1 border rounded px-2 py-1 text-sm">
-                  🇺🇸 <FiChevronDown />
-                </div>
+          {isBussinessDetails && (
+            <div className="space-y-4">
+              <div>
+                <label className="text-xs text-gray-500">Account Name</label>
                 <input
                   type="text"
-                  value="+1 344 434 4455"
-                  className="flex-1 px-3 py-2 rounded border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                  name="accountName"
+                  value={formData.accountName}
+                  onChange={handleChange}
+                  className="w-full mt-1 px-3 py-2 rounded border border-gray-300 dark:border-gray-700 dark:bg-gray-800
+                   dark:text-white
+                   
+                   "
                 />
-                <button className="px-3 py-1 text-sm text-red-500 border border-red-500 rounded hover:bg-red-100 dark:hover:bg-red-800">
-                  Remove
+              </div>
+              <div>
+                <label className="text-xs text-gray-500">Email</label>
+                <input
+                  name="email"
+                  type="email"
+                  onChange={handleChange}
+                  value={formData.email}
+                  className=" w-full mt-1 px-3 py-2 rounded border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                />
+              </div>
+
+              {/* Phone Numbers */}
+              <div>
+                <label className="text-xs text-gray-500">Phone Number</label>
+                {formData.phoneNumbers?.map((_, idx) => (
+                  <div key={idx} className="flex items-center gap-2 mt-2">
+                    <select className="flex items-center gap-1 border rounded px-2 py-2 text-sm text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700">
+                      {COUNTRY_CODES.map((country) => (
+                        <option
+                          key={country.code}
+                          value={country.code}
+                          className="text-sm z-10 "
+                        >
+                          {country.flag}
+                        </option>
+                      ))}
+                    </select>
+                    <input
+                      type="text"
+                      name={`phoneNumbers[${idx}]`}
+                      value={formData.phoneNumbers[idx] || ""}
+                      onChange={(e) => {
+                        const newPhoneNumbers = [...formData.phoneNumbers];
+                        newPhoneNumbers[idx] = e.target.value;
+                        setFormData({
+                          ...formData,
+                          phoneNumbers: newPhoneNumbers,
+                        });
+                      }}
+                      className="flex-1 px-3 py-2 rounded border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                    />
+                    <button
+                      className="cursor-pointer px-3 py-2 text-sm text-gray-900 border border-red-500 rounded dark:text-gray-200"
+                      onClick={(e) => handlePhoneRemove(e, idx)}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ))}
+                <button
+                  className="flex items-center gap-1 text-blue-600 text-sm mt-2"
+                  onClick={handleAddPhone}
+                >
+                  <FiPlus /> Add Phone
                 </button>
               </div>
-            ))}
-            <button className="flex items-center gap-1 text-blue-600 text-sm mt-2">
-              <FiPlus /> Add Phone
-            </button>
-          </div>
 
-          {/* Contact Owner */}
-          <div>
-            <label className="text-xs text-gray-500">Contact Owner</label>
-            <div className="flex items-center justify-between border mt-1 px-3 py-2 rounded dark:bg-gray-800 dark:border-gray-700">
-              <span className="text-sm text-gray-800 dark:text-white">
-                Suchithkumar@Onechanneladmin.com
-              </span>
-              <FiChevronDown className="text-gray-500" />
+              {/* Contact Owner */}
+              <OptionsComponent setFormData={setFormData} formData={formData} />
             </div>
-          </div>
-        </div>
+          )}
+        </form>
       </div>
     </div>
   );

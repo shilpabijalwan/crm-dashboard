@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
+.active-tab {
+  border-bottom: transparent;
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
