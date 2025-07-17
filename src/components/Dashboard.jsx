@@ -19,7 +19,7 @@ function Dashboard() {
         ))}
       </div>
 
-      <div className="w-full flex flex-1 gap-4 mt-5  dark:bg-gray-900 dark:border-gray-700 max-sm:flex-col">
+      <div className="w-full flex flex-1 gap-4 mt-5 dark:bg-gray-900 dark:border-gray-700 max-sm:flex-col">
         <OrderStatusCard />
         <OrderStatusCard title="Sales Status" />
       </div>

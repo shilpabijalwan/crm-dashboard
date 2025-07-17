@@ -29,7 +29,7 @@ function TabBar() {
       </div>
 
       {/* Content Area */}
-      <div className="p-4 border border-gray-200 rounded-b-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-200 ">
+      <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-b-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-200 ">
         <ActiveComponent />
       </div>
     </div>

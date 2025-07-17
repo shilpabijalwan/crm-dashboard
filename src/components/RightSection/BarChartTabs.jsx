@@ -19,8 +19,8 @@ const BarChartTabs = () => {
   const yLabels = Array.from({ length: steps + 1 }, (_, i) => i * stepValue);
   
   return (
-    <div className="w-full bg-gray-100 dark:bg-black rounded-lg shadow p-4">
-      <div className="w-[310px] justify-center flex space-x-4 mb-4 border border-gray-300  dark:border-gray-900 rounded-xl">
+    <div className="w-full bg-gray-100 dark:bg-black rounded-2xl shadow p-4 border border-gray-200 dark:border-gray-700 ">
+      <div className="w-[310px] justify-center flex space-x-4 mb-4 border border-gray-300  dark:border-gray-700 rounded-xl">
         {TABS.map((tab) => (
           <button
             key={tab.id}
