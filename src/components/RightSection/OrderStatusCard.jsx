@@ -62,7 +62,7 @@ export const OrderStatusCard = ({ title = "Orders Status" }) => {
   return (
     <div className="w-full border border-gray-200 dark:border-gray-700 rounded-2xl bg-white dark:bg-black">
       {/* Header */}
-      <div className="flex items-center p-4 justify-between">
+      <div className="flex items-center p-3 justify-between">
         <p className="text-lg font-semibold text-gray-800 dark:text-gray-200">
           {title}
         </p>
@@ -90,7 +90,7 @@ export const OrderStatusCard = ({ title = "Orders Status" }) => {
 
       {/* Grid Section */}
       <div className="flex items-center gap-4 py-4 border-t border-gray-300 dark:border-gray-700 max-sm:flex-col">
-        <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-4 px-5 py-4 w-full">
+        <div className="grid grid-cols-2 max-sm:grid-cols-3 gap-2 px-5 py-4">
           {filteredStatus.map((order) => (
             <div
               key={order.id}

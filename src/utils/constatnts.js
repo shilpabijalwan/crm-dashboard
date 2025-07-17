@@ -108,3 +108,134 @@ export const ORDERSTATUS = [
     count: 10,
   },
 ];
+
+export const RECENTORDERS=[
+  {
+    id:1,
+    productName:"Product 1",
+    orderStatus:"Pending",
+    orderTotal:"$100",
+    channel:"Amazon",
+    customerName:"John Doe",
+    deliveryDate:"2021-01-01",
+
+  },
+  {
+    id:2,
+    productName:"Product 2",
+    orderStatus:"Pending",
+    orderTotal:"$100",
+    channel:"Amazon",
+    customerName:"John Doe",
+    deliveryDate:"2021-01-01",
+  },
+  {
+    id:3,
+    productName:"Product 3",
+    orderStatus:"Pending",
+    orderTotal:"$100",
+    channel:"Amazon",
+    customerName:"John Doe",
+    deliveryDate:"2021-01-01",
+  },
+  {
+    id:4,
+    productName:"Product 4",
+    orderStatus:"Delivered",
+    orderTotal:"$100",
+    channel:"Amazon",
+    customerName:"John Doe",
+    deliveryDate:"2021-01-01",
+  },
+  {
+    id:5,
+    productName:"Product 5",
+    orderStatus:"Cancelled",
+    orderTotal:"$100",
+    channel:"Flipkart",
+    customerName:"John Doe",
+    deliveryDate:"2021-01-01",
+  },
+  {
+    id:6,
+    productName:"Product 6",
+    orderStatus:"Pending",
+    orderTotal:"$100",
+    channel:"Flipkart",
+    customerName:"John Doe",
+    deliveryDate:"2021-01-01",
+  },
+  {
+    id:7,
+    productName:"Product 7",
+    orderStatus:"Pending",
+    orderTotal:"$100",
+    channel:"Flipkart",
+    customerName:"John Doe",
+    deliveryDate:"2021-01-01",
+  },
+  {
+    id:8,
+    productName:"Product 8",
+    orderStatus:"Pending",
+    orderTotal:"$100",
+    channel:"meesho",
+    customerName:"John Doe",
+    deliveryDate:"2021-01-01",
+  },
+]
+
+
+export const BARCHARTDATA = [
+  {
+    title: "Revenue",
+    months: [
+      { month: "January", value: 12000 },
+      { month: "February", value: 15000 },
+      { month: "March", value: 17000 },
+      { month: "April", value: 14000 },
+      { month: "May", value: 16000 },
+      { month: "June", value: 18000 },
+      { month: "July", value: 20000 },
+      { month: "August", value: 19000 },
+      { month: "September", value: 17500 },
+      { month: "October", value: 18500 },
+      { month: "November", value: 21000 },
+      { month: "December", value: 23000 }
+    ]
+  },
+  {
+    title: "Orders",
+    months: [
+      { month: "January", value: 320 },
+      { month: "February", value: 410 },
+      { month: "March", value: 380 },
+      { month: "April", value: 450 },
+      { month: "May", value: 420 },
+      { month: "June", value: 460 },
+      { month: "July", value: 500 },
+      { month: "August", value: 480 },
+      { month: "September", value: 470 },
+      { month: "October", value: 510 },
+      { month: "November", value: 530 },
+      { month: "December", value: 550 }
+    ]
+  },
+  {
+    title: "Customers",
+    months: [
+      { month: "January", value: 100 },
+      { month: "February", value: 130 },
+      { month: "March", value: 120 },
+      { month: "April", value: 140 },
+      { month: "May", value: 135 },
+      { month: "June", value: 150 },
+      { month: "July", value: 160 },
+      { month: "August", value: 155 },
+      { month: "September", value: 145 },
+      { month: "October", value: 170 },
+      { month: "November", value: 180 },
+      { month: "December", value: 190 }
+    ]
+  }
+];

@@ -2,11 +2,13 @@ import React from "react";
 import { DASHBOARD_CONTENT } from "../utils/constatnts";
 import Cards from "./RightSection/Cards";
 import { OrderStatusCard } from "./RightSection/OrderStatusCard";
+import RecentOrder from "./RightSection/RecentOrder";
+import BarChartTabs from "./RightSection/BarChartTabs";
 
 function Dashboard() {
   return (
     <>
-      <div className="w-full flex gap-4 overflow-hidden">
+      <div className="w-full flex gap-4 overflow-hidden overflow-x-auto hide-scrollbar">
         {DASHBOARD_CONTENT.map((content, index) => (
           <div
             key={index}
@@ -21,8 +23,17 @@ function Dashboard() {
         <OrderStatusCard />
         <OrderStatusCard title="Sales Status" />
       </div>
+      <div className="mt-5 w-full ">
+        <RecentOrder />
+      </div>
+      <div className="mt-5 w-full ">
+      <BarChartTabs />
+      </div>
     </>
   );
 }
 
 export default Dashboard;
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+
