@@ -90,13 +90,19 @@ const AccountInfoCard = () => {
       {/* Header */}
       <div className=" flex items-center justify-between border border-gray-200 dark:border-gray-700 rounded-lg  py-3 bg-gray-50 dark:bg-gray-900">
         <div className="flex items-center gap-4 w-full px-2 justify-between">
-          <div className="relative">
-            <div className="w-10 h-10 bg-purple-600 text-white rounded-full flex items-center justify-center text-lg font-bold">
-              {initials}
+          <div className="relative w-20 h-20 mx-auto">
+            {/* Avatar Circle */}
+            <div className="w-20 h-20 bg-[#5B43D6] rounded-full flex flex-col items-center justify-end overflow-hidden shadow-md">
+              <div className="flex-1 flex items-center justify-center w-full">
+                <span className="text-white text-2xl font-bold">{initials}</span>
+              </div>
+              {/* Edit label inside the circle */}
+              <div className="w-full bg-[#4733a6] bg-opacity-90 text-white text-center text-md py-1 font-medium"
+              onClick={()=>setIsBussinessDetails(true)}
+              >Edit</div>
             </div>
-            {/* <span className="absolute bottom-1 -right-1 text-xs text-blue-500 cursor-pointer">
-              Edit
-            </span> */}
+            {/* Status Dot */}
+            <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full border-4 border-white bg-green-500"></span>
           </div>
           <div className="flex flex-col w-full gap-3">
             <div className="flex text-lg font-semibold text-gray-800 dark:text-white justify-between ">
@@ -141,13 +147,16 @@ const AccountInfoCard = () => {
 
       {/* Form Section business details */}
 
-      <div className="mt-6 border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-white dark:bg-gray-900">
+      {isBussinessDetails && 
+      ( <div className="mt-6 border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-white dark:bg-gray-900">
         <form action="" onSubmit={handleFormSubmit}>
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="text-sm font-semibold text-gray-700 dark:text-white">
-              Business Details
-            </h3>
-            {isBussinessDetails ? (
+        
+           
+        
+                <div className="flex items-center justify-between mb-2">
+               <h3 className="text-sm font-semibold text-gray-700 dark:text-white">
+               Business Details
+             </h3>
               <button
                 type="submit"
                 className="flex items-center gap-1 text-green-600 text-sm font-medium"
@@ -155,21 +164,9 @@ const AccountInfoCard = () => {
                 <FiCalendar className="text-green-600" />
                 Save & Close
               </button>
-            ) : (
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIsBussinessDetails(true);
-                }}
-                className="flex items-center gap-1 text-green-600 text-sm font-medium"
-              >
-                <FiCalendar className="text-green-600" />
-                Edit Details
-              </button>
-            )}
           </div>
-          {isBussinessDetails && (
+            {/* )} */}
+          {/* {isBussinessDetails && ( */}
             <div className="space-y-4">
               <div>
                 <label className="text-xs text-gray-500">Account Name</label>
@@ -244,9 +241,9 @@ const AccountInfoCard = () => {
               {/* Contact Owner */}
               <OptionsComponent setFormData={setFormData} formData={formData} />
             </div>
-          )}
         </form>
       </div>
+          )}
     </div>
   );
 };

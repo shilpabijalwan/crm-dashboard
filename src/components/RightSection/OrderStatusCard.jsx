@@ -60,7 +60,7 @@ export const OrderStatusCard = ({ title = "Orders Status" }) => {
   };
 
   return (
-    <div className="w-full border border-gray-200 dark:border-gray-700 rounded-2xl bg-white dark:bg-black">
+    <div className="w-full border border-gray-200 dark:border-gray-700 rounded-2xl bg-gray-100 dark:bg-black">
       {/* Header */}
       <div className="flex items-center p-3 justify-between">
         <p className="text-lg font-semibold text-gray-800 dark:text-gray-200">

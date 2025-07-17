@@ -8,7 +8,7 @@ function TabBar() {
   return (
     <div className="w-full">
       {/* Tabs */}
-      <div className="flex gap-4  max-sm:gap-2">
+      <div className="flex gap-4 max-sm:gap-2">
         {TABS.map((tab, idx) => (
           <div
             key={idx}
@@ -29,7 +29,7 @@ function TabBar() {
       </div>
 
       {/* Content Area */}
-      <div className="p-4 border-gray-700 border-t border-l border-r border-b bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-200 ">
+      <div className="p-4 border border-gray-200 rounded-b-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-200 ">
         <ActiveComponent />
       </div>
     </div>

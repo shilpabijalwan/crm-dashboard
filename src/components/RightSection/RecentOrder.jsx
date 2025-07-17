@@ -5,13 +5,13 @@ const RecentOrder = () => {
   const [showAll, setShowAll] = useState(false);
   const ordersToShow = showAll ? RECENTORDERS : RECENTORDERS.slice(0, 5);
   return (
-    <div className="overflow-x-auto bg-white dark:bg-black rounded-2xl border border-gray-200 dark:border-gray-700">
-      <table className="min-w-full bg-white dark:bg-black border-collapse">
-      <caption className="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-900">
+    <div className="overflow-x-auto bg-gray-100 dark:bg-black rounded-2xl border border-gray-200 dark:border-gray-700">
+      <table className="min-w-full bg-gray-100 dark:bg-black border-collapse">
+      <caption className="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-gray-100 dark:text-white dark:bg-black">
           Recent Orders
         </caption>
         <thead>
-          <tr>
+          <tr className="bg-white dark:bg-gray-900">
             <th className="py-2 px-4 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-200">Product Name</th>
             <th className="py-2 px-4 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-200">Order Status</th>
             <th className="py-2 px-4 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-200">Order Total</th>
