@@ -8,13 +8,13 @@ function TabBar() {
   return (
     <div className="w-full">
       {/* Tabs */}
-      <div className="flex gap-4  ">
+      <div className="flex gap-4  max-sm:gap-2">
         {TABS.map((tab, idx) => (
           <div
             key={idx}
             onClick={() => setActiveTab(idx)}
             className={`
-             px-6 py-2 text-sm border items-center cursor-pointer
+             px-6 py-2 text-sm border items-center cursor-pointer max-sm:px-2
               transition-all duration-200 border-gray-300 
               ${
                 activeTab === idx
